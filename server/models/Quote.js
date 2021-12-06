@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-const { QuoteSourceSchema } = require("./sharedSchemas");
+const { QuoteSourceSchema, LikeSchema } = require("./sharedSchemas");
 
+// shared across platform
 const QuoteSchema = mongoose.Schema(
   {
     user: {
@@ -13,11 +14,24 @@ const QuoteSchema = mongoose.Schema(
       required: true,
     },
     quoteSource: QuoteSourceSchema,
+    // quoteSource is optional
+    // if there is a quoteSource, author takes the value of
+    // quoteSource.source.author
+    // this should be the author of the book
+    // otheriwise, author with take this "author "value here
+    // nullable
+    author: {
+      type: String,
+    },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
     },
-    likes: [ReviewSchema],
+    public: {
+      type: Boolean,
+      default: true,
+    },
+    likes: [LikeSchema],
     numLikes: {
       type: Number,
       default: 0,

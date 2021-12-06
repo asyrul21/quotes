@@ -20,6 +20,7 @@ const SourceCommentSchema = mongoose.Schema(
   }
 );
 
+// this source is shared accross app with all users
 const SourceSchema = mongoose.Schema(
   {
     createdBy: {
@@ -30,7 +31,7 @@ const SourceSchema = mongoose.Schema(
     type: {
       type: String,
       required: true,
-      default: sourceTypes,
+      default: sourceTypes.books,
     },
     // use API to get book cover, otherwise fallback to default source image
     title: {

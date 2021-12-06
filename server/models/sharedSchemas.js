@@ -6,7 +6,9 @@ const QuoteSourceSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Source",
     },
-    page: { type: Number, required: true },
+    // if source is of type "others"
+    // it may not have page
+    page: { type: Number },
     description: { type: String },
   },
   {
